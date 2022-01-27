@@ -14,4 +14,11 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
-/vendor/
+application/third_party/codeigniter-debugbar
+application/writeable
+
+public
+error_log
+ajax-loader.gif
+.htaccess
+htaccess.txt

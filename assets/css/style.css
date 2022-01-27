@@ -1,0 +1,115 @@
+/* Rubahbesi.com - aHR0cHM6Ly9ydWJhaGJlc2kuY29t */
+
+:root { 
+    --grad-blue: linear-gradient(90deg, rgba(54,118,251,1) 0%, rgba(21,85,224,1) 50%);
+    --grad-purple: linear-gradient(90deg, rgba(146,66,253,1) 0%, rgba(115,23,239,1) 50%);
+    --grad-orange: linear-gradient(90deg, rgba(255,139,87,1) 0%, rgba(228,91,29,1) 50%);
+
+    --blue: rgba(21,85,224,1);
+    --purple: rgba(115,23,239,1);
+    --orange: rgba(228,91,29,1);
+
+    --hc-green: #02D748;
+    --hc-red: #FF0000;
+}
+
+
+html, body { display:block; overflow-x:hidden; min-height:100vh; width:100%; max-width:100%; }
+body { background:url('../images/bg.jpg') no-repeat center center; background-size:cover; background-attachment:fixed; color:#515151; }
+
+p { margin-bottom:1.55rem; }
+/* P:last-of-type { margin-bottom:0; } */
+
+.btn { padding:.375rem 1.3rem .45rem; }
+
+form [type=submit] { text-transform:uppercase; font-weight:bold; }
+.form-floating > textarea.form-control { min-height:calc(116px + .5rem); }
+.form-control.pwd,
+.form-floating > .form-control.pwd { padding-right:3rem; }
+
+.revealer { position:absolute; top:1.1rem; right:1rem; }
+
+
+/* ------------------------------ ANCHOR Modal ------------------------------ */
+.smodal { position:absolute; z-index:10000; top:0; left:0; visibility:hidden; width:100%; height:100% }
+.smodal.is-visible { visibility:visible }
+.smodal-overlay { position:fixed; z-index:10; top:0; left:0; width:100%; height:100%; background:hsla(0,0%,0%,.5); visibility:hidden; opacity:0; transition:visibility 0s linear .3s,opacity .3s }
+.smodal.is-visible .smodal-overlay{ opacity:1; visibility:visible; transition-delay:0s }
+.smodal-wrapper { position:absolute; z-index:9999; top:6em; left:80%; width:80%; margin-left:-70%; background-color:#fff; box-shadow:0 0 1.5em hsla(0,0%,0%,.35) }
+.smodal-transition { transition:all .3s .12s; transform:translateY(-10%);opacity:0 }
+.smodal.is-visible .smodal-transition { transform:translateY(0); opacity:1 }
+.smodal-content,.smodal-header { padding:1em } 
+.smodal-header { position:relative; background-color:#fff; box-shadow:0 1px 2px hsla(0,0%,0%,.06); border-bottom:1px solid #e8e8e8 } 
+.smodal-close { position:absolute; top:0; right:0; padding:1em; color:#aaa; background:0 0;border:0 }
+.smodal-close:hover{ color:#777 }
+.smodal-heading { font-size:1.125em; margin:0; -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale }
+.smodal-content > :first-child { margin-top:0 }
+.smodal-content > :last-child { margin-bottom:0 }
+
+
+
+
+.header { display:block; padding:20px 0; }
+.header .logo > img { display:inline-block; max-height:36px; }
+.header .member { text-align:right; }
+.header .member a { display:inline-block; position:relative; margin:0 3px; }
+.header .member a.active { box-shadow: 0 0 0 .25rem rgba(100,100,100,.5); background:#fff; }
+
+
+
+.menus .inner { margin-bottom:.5rem; }
+.menus .inner > img { max-height:34px; margin-bottom:.55em; }
+.menus .inner a { text-transform:uppercase; font-weight:bold; width:160px; text-shadow:1px 1px 1px rgba(0,0,0,.1); }
+.menus .inner .grad-blue { background:var(--grad-blue); border-color:var(--blue); } 
+.menus .inner .grad-purple { background:var(--grad-purple); border-color:var(--purple); } 
+.menus .inner .grad-orange { background:var(--grad-orange); border-color:var(--orange); } 
+.menus .inner .active { box-shadow: 0 0 0 .25rem rgba(100,100,100,.5); }
+
+
+.rotator { margin:170px 0; }
+.rotator__slider { display:block; position:relative; border-top:1px solid #515151; border-bottom:1px solid #515151; border-left:1px solid #888; }
+.rotator__slider .item { text-align:center; padding:1rem .4rem; position:relative; background:rgba(255,255,255,.3); border-right:1px solid #888; }
+/* .rotator__slider .item::after { content:""; position:absolute; top:0; right:-1px; height:100%; width:1px; background:#888; } */
+.rotator__slider .item span { padding:.3rem; display:inline-block; }
+.rotator__slider .item .success,
+.rotator__slider .item .failed { background:var(--hc-green); padding:.3rem .75rem; font-size:12px; text-transform:uppercase; color:#fff; font-weight:bold; position:relative; top:3px; text-shadow:1px 1px 1px rgba(0,0,0,.1); }
+.rotator__slider .item .failed { background:var(--hc-red); }
+
+
+.about .inner { display:block; padding:30px 0; }
+.about .inner P:last-of-type { margin-bottom:0; }
+
+
+/* ------------------------------ ANCHOR Footer ----------------------------- */
+.footer .copyr { font-size:14px; color:#7f7f7f; }
+.footer .copyr a { text-decoration:none; color:#7f7f7f; }
+.footer .copyr a:hover { color:#111; text-decoration:underline; }
+
+
+.white-block { background:#fff; padding:20px; border-radius:8px; position:relative; box-shadow:0 0 4px rgba(0,0,0,.1); }
+.white-block .table { font-size:.9rem; }
+
+.hidden-cont .inner { min-height:100%; }
+.hidden-cont .inner form { width:100%; }
+.hidden-cont .animate__animated { display:none; }
+
+
+
+.txt-block-red { background:crimson; color:#fff; border-radius:100rem; padding-left:.65rem; padding-right:.65rem; }
+
+
+
+.table-cust-blue > thead > tr { background-color:#1555e0; color:#fff; }
+.table-cust-blue.table-striped > tbody > tr { background-color:#97dae3; }
+.table-cust-blue.table-striped > tbody > tr:nth-of-type(2n+1) > * { background-color:#e2fbff; }
+
+
+
+@media all and (max-width:600px) {
+
+
+.logo { text-align:center; display:block; }
+.header .member { text-align:center; margin-top:1rem; }
+
+
+}
