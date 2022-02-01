@@ -32,6 +32,19 @@ const App = () => {
             $("#" + disTarget).show().addClass('animate__fadeIn');
         });
 
+        $('.revealer').click(function (e) {
+            var $pwd = $('.pwd');
+            var $eye = $(this).find('i.fas');
+            if ($pwd.attr('type') === 'password') {
+                $pwd.attr('type', 'text');
+                $eye.removeClass('fa-eye-slash').addClass('fa-eye');
+            } else {
+                $pwd.attr('type', 'password');
+                $eye.removeClass('fa-eye').addClass('fa-eye-slash');
+            }
+            e.preventDefault();
+        });
+
         const captchaRandom = Math.floor(Math.random() * 100000)
 
         setCaptcha(captchaRandom)
@@ -158,6 +171,11 @@ const App = () => {
                 if (postDeposit.status === 200) {
                     if (response.status === 'Success') {
                         Swal.fire('Success', 'Thanks for your deposit', 'success')
+                        .then(btnYes => {
+                            if (btnYes.isConfirmed) {
+                                $('#userDeposit')[0].reset()
+                            }
+                        })
                     }else{
                         Swal.fire(response['status'], response['message'], 'error')
                     }
@@ -207,6 +225,11 @@ const App = () => {
                 if (withdrawPost.status === 200) {
                     if (response.status === 'Success') {
                         Swal.fire('Success', 'Thanks for your deposit', 'success')
+                        .then(btnYes => {
+                            if (btnYes.isConfirmed) {
+                                $('#userwithdrawal')[0].reset()
+                            }
+                        })
                     }else{
                         Swal.fire(response['status'], response['message'], 'error')
                     }

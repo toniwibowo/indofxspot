@@ -258,7 +258,7 @@
             const response = await queryRebateBalance.json()
             if (queryRebateBalance.status === 200) {
                 if (response.status === 'Success') {
-                    setRbtBalance(response.data['rbt_balance'])
+                    setRbtBalance(response.data['rbt_balance'] - response.data['rbt_payout'])
                 }
             }
         }

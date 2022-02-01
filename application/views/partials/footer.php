@@ -2,7 +2,6 @@
     $getDeposit = $this->db->order_by('dt_depositDate', 'DESC')->limit(10)->get('deposit');
     $getWithdraw = $this->db->order_by('dt_withdrawDate', 'DESC')->limit(10)->get('withdrawal');
 
-
 ?>
 
 <div class="rotator">
@@ -14,21 +13,28 @@
                     
                     if ($getDeposit->num_rows() > 0) {
                         foreach ($getDeposit->result_array() as $key => $value) {
-                            $statusClass = $value["dt_status"] == "onProcess" ? "failed rounded-pill" : "success rounded-pill";
-                            $status = $value["dt_status"] == "onProcess" ? "Proses" : "Sukses";
+                            if ($value["dt_status"] == "process") {
+                                $statusClass = "process rounded-pill";
+                            }elseif($value["dt_status"] == "success"){
+                                $statusClass = "success rounded-pill";
+                            }else{
+                                $statusClass = "failed rounded-pill";
+                            }
+                            
+                            $status = ucwords($value["dt_status"]);
                             echo '<div class="item">
                             <div class="row">
                                 <div class="col-md-4">
                                     <span>'.date('d-m-Y H:i:s', strtotime($value['dt_depositDate'])).'</span>
                                 </div>
                                 <div class="col-md-3">
-                                    <span>'.$value['dt_noWallet'].'USD</span>
+                                    <span>'.sensorKata($value['dt_noWallet']).'</span>
                                 </div>
                                 <div class="col-md-3">
-                                    <span>IDR '.number_format($value['dt_depositIdr'],2,',','.').'</span>
+                                    <span>USD '.$value['dt_depositUsd'].'</span>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="'.$statusClass.'">'.$status.'</span>
+                                    <span class="'.$statusClass.'">DPT '.$status.'</span>
                                 </div>
                             </div>
                         </div>';
@@ -37,21 +43,29 @@
                     
                     if ($getWithdraw->num_rows() > 0) {
                         foreach ($getWithdraw->result_array() as $key => $value) {
-                            $statusClass = $value["dt_status"] == "onProcess" ? "failed rounded-pill" : "success rounded-pill";
-                            $status = $value["dt_status"] == "onProcess" ? "Proses" : "Sukses";
+
+                            if ($value["dt_status"] == "process") {
+                                $statusClass = "process rounded-pill";
+                            }elseif($value["dt_status"] == "success"){
+                                $statusClass = "success rounded-pill";
+                            }else{
+                                $statusClass = "failed rounded-pill";
+                            }
+                            $status = ucwords($value["dt_status"]);
+
                             echo '<div class="item">
                             <div class="row">
                                 <div class="col-md-4">
                                     <span>'.date('d-m-Y H:i:s', strtotime($value['dt_withdrawDate'])).'</span>
                                 </div>
                                 <div class="col-md-3">
-                                    <span>'.$value['dt_noWallet'].'USD</span>
+                                    <span>'.sensorKata($value['dt_noWallet']).'</span>
                                 </div>
                                 <div class="col-md-3">
                                     <span>USD '.number_format($value['dt_withdrawal'],2,'.',',').'</span>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="'.$statusClass.'">'.$status.'</span>
+                                    <span class="'.$statusClass.'">WDW '.$status.'</span>
                                 </div>
                             </div>
                         </div>';

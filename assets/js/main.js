@@ -8,7 +8,7 @@ jQuery(document).ready(function ($) {
         dots: false,
         autoplay: true,
         autoplayHoverPause: true,
-        autoplayTimeout: 3000
+        autoplayTimeout: 1500
     });
 
 

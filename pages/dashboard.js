@@ -12,12 +12,13 @@ const App = () => {
     useEffect(() => {
         getUser()
         getDataRibates()
-        // getRebateValue()
+        getRebateValue()
         getBrokerData()
+        getRibatesPayout()
     }, [])
 
     const getDataRibates = async () => {
-        const getRebates = await fetch(`${app.baseUrl}api/rebates/getDataRebates?limit=5`)
+        const getRebates = await fetch(`${app.baseUrl}api/rebates/history?limit=5`)
         const response = await getRebates.json()
         if (getRebates.status === 200) {
             if (response.status === 'Success') {
@@ -26,9 +27,21 @@ const App = () => {
         }
     }
 
+    const getRibatesPayout = async () => {
+        const getRebates = await fetch(`${app.baseUrl}api/rebates/payout`)
+        const response = await getRebates.json()
+        if (getRebates.status === 200) {
+            if (response.status === 'Success') {
+                setDataRebatesPayout(response.data)
+            }
+        }
+    }
+
     const getRebateValue = async () => {
-        const rebateValue = await fetch(`${app.baseUrl}api/rebates/getRebateHistory`)
+        const rebateValue = await fetch(`${app.baseUrl}api/rebates/getRebateBalance`)
         const response = await rebateValue.json()
+
+        console.log('REBATES BALANCE', response);
 
         if (rebateValue.status === 200) {
             if (response.status === 'Success') {
@@ -115,7 +128,7 @@ const App = () => {
                 <div className="page-cont-inner">
                     <div className="row">
                         <div className="col-md-8">
-                            <MainMenu dataBroker={dataBroker} actionModal={() => openModalHandler()} />
+                            <MainMenu dataBroker={dataBroker} actionModal={() => openModalHandler()} rebate={dataRebateValue} />
                             <ModalWithdrawal change={(e) => withdrawalInputHandler(e)} submit={() => withdrawalSubmitHandler()} />
                             <RebateTable data={dataRebates} broker={dataBroker} />
                             <RebateTablePayout data={dataRebatesPayout} />

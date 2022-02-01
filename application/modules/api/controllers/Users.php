@@ -120,6 +120,7 @@ class Users extends REST_Controller
         $data['dt_bank']        = $this->post('dt_bank');
         $data['dt_noRekening']  = $this->post('dt_noRekening');
         $data['dt_depositIdr']  = $this->post('dt_depositIdr');
+        $data['dt_depositUsd']  = $this->post('dt_depositUsd');
         $data['dt_depositDate'] = date('Y-m-d H:i:s');
 
         $insert = $this->db->insert('deposit', $data);

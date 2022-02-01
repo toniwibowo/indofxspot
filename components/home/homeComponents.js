@@ -192,7 +192,7 @@ const Deposit = ({data, change, onBlur, onSubmit}) => {
                     </div>
                     <div className="col-md-6">
                         <div className="inner">
-                            <form className="form" action="action.php" method="post" onSubmit={onSubmit}>
+                            <form className="form" id="userDeposit" action="" method="post" onSubmit={onSubmit}>
                                 <div className="form-floating mb-2">
                                     <input type="text" name="dt_fullname" id="dt_fullname" className="form-control" placeholder="Nama" onChange={change} required="required" />
                                     <label htmlFor="dt_nama">Nama</label>
@@ -276,7 +276,7 @@ const Withdrawal = ({change, onSubmit, captcha, captchaReloader}) => {
                     </div>
                     <div className="col-md-6">
                         <div className="inner d-flex align-items-center">
-                            <form className="form" action="action.php" method="post" onSubmit={onSubmit}>
+                            <form className="form" id="userwithdrawal" action="" method="post" onSubmit={onSubmit}>
                                 <div className="row gx-2">
                                     <div className="col-md-6">
                                         <div className="form-floating mb-2">
@@ -441,9 +441,9 @@ const Login = () => {
                             </div>
                             <div className="form-floating mb-2">
                                 <input ref={password} type="password" name="dt_password" id="dt_passwordLogin" className="form-control pwd" placeholder="Password" />
-                                <span className="revealer">
-                                            <i className="fas fa-fw fa-eye-slash"></i>
-                                        </span>
+                                    <span className="revealer">
+                                        <i className="fas fa-fw fa-eye-slash"></i>
+                                    </span>
                                 <label htmlFor="dt_password">Password</label>
                             </div>
                             <div className="d-grid gap-2 mt-3">

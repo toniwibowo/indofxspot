@@ -86,7 +86,10 @@ const ModalWithdrawal = ({change, submit}) => {
     )
 }
 
-const MainMenu = ({dataBroker, actionModal}) => {
+const MainMenu = ({dataBroker, actionModal, rebate}) => {
+
+    console.log('RBT', rebate, Object.keys('rebate').length);
+
     return(
         <>
             <div className="main-menu">
@@ -101,7 +104,7 @@ const MainMenu = ({dataBroker, actionModal}) => {
                                     <div className="col-9">
                                         <div className="block-cont">
                                             <span className="d-block mb-1">Total Rebate Earning</span>
-                                            <h2 className="mb-0">$0</h2>
+                                            <h2 className="mb-0">${rebate.rbt_balance}</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -139,7 +142,7 @@ const MainMenu = ({dataBroker, actionModal}) => {
                         <div className="col-md-6 col-8">
                             <div className="block-cont">
                                 <span className="d-block mb-1">Total Withdrawal Anda</span>
-                                <h2 className="py-1">$0</h2>
+                                <h2 className="py-1">${rebate.rbt_payout}</h2>
                                 <button className="btn btn-sm btn-success" onClick={actionModal}>ORDER WITHDRAWAL</button>
                             </div>
                         </div>
@@ -151,7 +154,7 @@ const MainMenu = ({dataBroker, actionModal}) => {
 }
 
 const RebateTablePayout = ({data}) => {
-    //console.log('DATA REBATES', data);
+    console.log('DATA REBATES PAYOUT', data);
 
     return(
         <div className="block shadow mb-3">
@@ -164,11 +167,11 @@ const RebateTablePayout = ({data}) => {
                                 <thead>
                                     <tr>
                                         <th scope="col">CREATION DATE</th>
-                                        <th scope="col">PAYMENT ID</th>
                                         <th scope="col">PAYMENT SYSTEM</th>
+                                        <th scope="col">BANK NAME</th>
+                                        <th scope="col">BANK ACCOUNT</th>
                                         <th scope="col">VOLUME</th>
                                         <th scope="col" className="text-center">STATUS</th>
-                                        <th scope="col" className="text-center">DETAIL</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -177,12 +180,12 @@ const RebateTablePayout = ({data}) => {
                                             data.map((item,idx) => {
                                                 return(
                                                     <tr key={idx}>
-                                                        <td>{item['date_order']}</td>
-                                                        <td>{item['account_number']}</td>
-                                                        <td>{item['category']}</td>
-                                                        <td>${item['amount']}</td>
-                                                        <td align="center"><i className="fas fa-fw fa-check"></i></td>
-                                                        <td></td>
+                                                        <td>{item['cst_wdw_date']}</td>
+                                                        <td>{item['name']}</td>
+                                                        <td>{item['bank_name']}</td>
+                                                        <td>{item['bank_account']}</td>
+                                                        <td>${item['cst_wdw_amount']}</td>
+                                                        <td align="center"><i className="fas fa-fw fa-check"></i> {item['cst_wdw_status']}</td>
                                                     </tr>
                                                 )
                                             })

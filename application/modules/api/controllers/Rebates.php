@@ -15,9 +15,45 @@ class Rebates extends REST_Controller{
         if ($method == 'OPTIONS') {
             die();
         }
-        parent::__construct();
+        parent::__construct();        
+    }
 
-        
+    public function history_get()
+    {
+
+        if ($this->get('id')) {
+            $query = $this->db->where('rebate_id', $this->get('id'))->get('wallet');
+            $response['status'] = 'Success';
+            $response['message'] = 'Get data rebates by id';
+            $response['data'] = $query->num_rows() > 0 ? $query->row() : (object)array();
+
+            $this->response($response, 200);
+        }elseif ($this->get('limit')) {
+
+            $query = $this->db->where('wallet.is_counting', 1)->where('customer.customer_id', $this->session->userdata('custId'))->where('admin_broker.dt_status','Validated')->where('customer.status','active')->order_by('date_order', 'DESC')->limit($this->get('limit'))->from('wallet')->join('admin_broker','admin_broker.dt_accNumber = wallet.account_number')->join('admin_account_type','admin_broker.account_type_id = admin_account_type.account_type_id')->join('customer','customer.customer_id = admin_broker.customer_id')->get();
+            $response['status'] = 'Success';
+            $response['message'] = 'Get data rebates by limit';
+            $response['data'] = $query->result();
+
+            $this->response($response, 200);
+        } else{
+            $query = $this->db->where('wallet.is_counting', 1)->where('customer.customer_id', $this->session->userdata('custId'))->where('admin_broker.dt_status','Validated')->where('customer.status','active')->order_by('date_order', 'DESC')->from('wallet')->join('admin_broker','admin_broker.dt_accNumber = wallet.account_number')->join('admin_account_type','admin_broker.account_type_id = admin_account_type.account_type_id')->join('customer','customer.customer_id = admin_broker.customer_id')->get();
+            $response['status'] = 'Success';
+            $response['message'] = 'Get all data rebates';
+            $response['data'] = $query->result();
+
+            $this->response($response, 200);    
+        }        
+    }
+
+    public function payout_get()
+    {
+        $query = $this->db->from('customer_withdrawal')->where('cst_id', $this->session->userdata('custId'))->join('payment_method','payment_method.payment_id=customer_withdrawal.cst_wdw_payment_id')->join('payment_list','payment_list.payList_id=customer_withdrawal.cst_wdw_paylist_id')->limit(5,0)->get();
+        $response['status'] = 'Success';
+        $response['message'] = 'Get data payout';
+        $response['data'] = $query->result();
+
+        $this->response($response, 200);
     }
 
     public function getDataRebates_get()
@@ -48,7 +84,7 @@ class Rebates extends REST_Controller{
         }        
     }
 
-    public function rebateBalance_post(Type $var = null)
+    public function rebateBalance_post()
     {
         $this->load->model('Rebates_model','rebate');
         
@@ -56,7 +92,7 @@ class Rebates extends REST_Controller{
         $data['rbt_balance']    = $this->post('rbt_balance');
         $data['rbt_date']       = $this->post('rbt_date');
 
-        $getRbtBalance = $this->rebate->getRebateBalance($customerID);
+        $getRbtBalance = $this->rebate->getRebateBalance($data['customer_id']);
 
         if ($getRbtBalance->num_rows() > 0) {
 
@@ -241,7 +277,7 @@ class Rebates extends REST_Controller{
 
         if ($rebate->num_rows() > 0) {
             $row = $rebate->row_array();
-            if ($data['cst_wdw_amount'] > $row['rbt_balance']) {
+            if ($data['cst_wdw_amount'] > ($row['rbt_balance'] - $row['rbt_payout'])) {
                 $response['status']     = 'Failed';
                 $response['message']    = 'Your request amount is biger than your rebate balance';
 
