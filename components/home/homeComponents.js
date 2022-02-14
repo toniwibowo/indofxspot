@@ -53,7 +53,7 @@ const Registration = ({change, submit}) => {
                         <h2 className="d-block text-center mt-3 mb-4"><b>REGISTER</b></h2>
                     </div>
                     <div className="row g-4 gx-3">
-                        <div className="col-md-6">
+                        <div className="col-md-6 offset-md-3">
                             <div className="row gx-2">
                                 <div className="col-md-6">
                                     <div className="form-floating mb-2">
@@ -123,8 +123,11 @@ const Registration = ({change, submit}) => {
                                     </div>
                                 </div>
                             </div> */}
+                            <div className="d-grid gap-2 mt-2">
+                                <button type="submit" className="btn btn-md btn-primary mb-3">Register</button>
+                            </div>
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6 d-none">
                             <div className="form-floating mb-2">
                                 <textarea name="dt_address" id="dt_address" className="form-control" placeholder="Address" onChange={change} required="required"></textarea>
                                 <label htmlFor="dt_address">Address</label>
@@ -137,9 +140,7 @@ const Registration = ({change, submit}) => {
                                     </div>
                                 </div>
                             </div> */}
-                            <div className="d-grid gap-2 mt-2">
-                                <button type="submit" className="btn btn-md btn-primary mb-3">Register</button>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

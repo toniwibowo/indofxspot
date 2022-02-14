@@ -76,4 +76,26 @@ class Broker extends REST_Controller{
         $this->response($response, 200);
     }
 
+    public function delAccBroker_post()
+    {
+        $id = $this->post('broker_id');
+
+        $checkData = $this->db->where('broker_id', $id)->where('dt_status','Unvalidated')->get('admin_broker');
+        
+        if ($checkData->num_rows() > 0) {
+            $deleteItem = $this->db->where('broker_id', $id)->where('dt_status','Unvalidated')->delete('admin_broker');
+            $response['status']     = 'Success';
+            $response['message']    = 'Broker account has been succesfully deleted';
+            $response['broker_id']  = $id;
+
+            $this->response($response, 200);
+        }else{
+            $response['status']     = 'Failed';
+            $response['message']    = 'Broker account has been failed to delete';
+            $response['broker_id']  = $id;
+
+            $this->response($response, 200);
+        }
+    }
+
 }

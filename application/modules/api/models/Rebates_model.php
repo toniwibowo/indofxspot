@@ -12,4 +12,11 @@ class Rebates_model extends CI_Model{
 
         return $queryRebate;
     }
+
+    public function getKurs()
+    {
+        $queryKurs = $this->db->order_by('kurs_id', 'desc')->get('admin_kurs');
+
+        return $queryKurs;
+    }
 }

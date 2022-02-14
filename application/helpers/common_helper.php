@@ -8,7 +8,7 @@
 
         for ($i=0; $i < $kataJumlah ; $i++) {
             $kataSensor[$i] = $kataArray[$i]; 
-            if ($i > 0 && $i <= ($kataJumlah - 3) ) {
+            if ($i > 0 && $i <= ($kataJumlah - 4) ) {
                 $kataSensor[$i] = '*';
             }
         }

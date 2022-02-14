@@ -1,7 +1,7 @@
 const App = () => {
     const {useEffect, useState, useCallback, useRef} = React
 
-    const[regParam, setRegParam] = useState({dt_fname:'', dt_lname:'', dt_password: '', dt_email:'', dt_address:'' })
+    const[regParam, setRegParam] = useState({dt_fname:'', dt_lname:'', dt_password: '', dt_email:'' })
     const[depositParam, setDepositParam] = useState({dt_fullname:'', dt_email:'', dt_noWallet:'', dt_bank: '', dt_noRekening:'', dt_depositIdr: 0, dt_depositIdrFormat: 0, dt_depositUsd: 0 })
     const[withdrawParam, setWithdrawParam] = useState({dt_withdrawal: 0, dt_noWallet: '', dt_namaKtp: '', dt_email:'', dt_bank: '', dt_noRekening: '', dt_captcha:''})
     const[captcha, setCaptcha] = useState('');
@@ -170,7 +170,7 @@ const App = () => {
 
                 if (postDeposit.status === 200) {
                     if (response.status === 'Success') {
-                        Swal.fire('Success', 'Thanks for your deposit', 'success')
+                        Swal.fire('Success', 'Thanks for your deposit, please check your email', 'success')
                         .then(btnYes => {
                             if (btnYes.isConfirmed) {
                                 $('#userDeposit')[0].reset()

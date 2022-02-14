@@ -265,10 +265,18 @@ class Rebates extends REST_Controller{
         $this->load->model('Rebates_model','rebate');
 
         $payment = explode(',', $this->post('cst_wdw_paylist'));
+        $kurs = $this->rebate->getKurs();
+        $kursWdw = 1;
+
+        if ($kurs->num_rows() > 0) {
+            $kursWdw = $kurs->row()->kurs_withdrawal;
+        }
+
         $data['cst_id']             = $this->post('cst_id');
         $data['cst_wdw_payment_id'] = $payment[0];
         $data['cst_wdw_paylist_id'] = $payment[1];
         $data['cst_wdw_amount']     = $this->post('cst_wdw_amount');
+        $data['cst_wdw_amount_idr'] = $this->post('cst_wdw_amount') * $kursWdw;
         $data['cst_wdw_desc']       = $this->post('cst_wdw_desc');
         $data['cst_wdw_date']       = date('Y-m-d H:i:s');
 

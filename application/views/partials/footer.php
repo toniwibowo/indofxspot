@@ -14,21 +14,24 @@
                     if ($getDeposit->num_rows() > 0) {
                         foreach ($getDeposit->result_array() as $key => $value) {
                             if ($value["dt_status"] == "process") {
+                                $status = "On ". ucwords($value["dt_status"]);
                                 $statusClass = "process rounded-pill";
                             }elseif($value["dt_status"] == "success"){
+                                $status = ucwords($value["dt_status"]);
                                 $statusClass = "success rounded-pill";
                             }else{
+                                $status = ucwords($value["dt_status"]);
                                 $statusClass = "failed rounded-pill";
                             }
                             
-                            $status = ucwords($value["dt_status"]);
+                            
                             echo '<div class="item">
                             <div class="row">
                                 <div class="col-md-4">
                                     <span>'.date('d-m-Y H:i:s', strtotime($value['dt_depositDate'])).'</span>
                                 </div>
                                 <div class="col-md-3">
-                                    <span>'.sensorKata($value['dt_noWallet']).'</span>
+                                    <span>SF'.sensorKata($value['dt_noWallet']).'USD</span>
                                 </div>
                                 <div class="col-md-3">
                                     <span>USD '.$value['dt_depositUsd'].'</span>
@@ -45,13 +48,15 @@
                         foreach ($getWithdraw->result_array() as $key => $value) {
 
                             if ($value["dt_status"] == "process") {
+                                $status = "On ". ucwords($value["dt_status"]);
                                 $statusClass = "process rounded-pill";
                             }elseif($value["dt_status"] == "success"){
+                                $status = ucwords($value["dt_status"]);
                                 $statusClass = "success rounded-pill";
                             }else{
+                                $status = ucwords($value["dt_status"]);
                                 $statusClass = "failed rounded-pill";
                             }
-                            $status = ucwords($value["dt_status"]);
 
                             echo '<div class="item">
                             <div class="row">
@@ -59,7 +64,7 @@
                                     <span>'.date('d-m-Y H:i:s', strtotime($value['dt_withdrawDate'])).'</span>
                                 </div>
                                 <div class="col-md-3">
-                                    <span>'.sensorKata($value['dt_noWallet']).'</span>
+                                    <span>SF'.sensorKata($value['dt_noWallet']).'USD</span>
                                 </div>
                                 <div class="col-md-3">
                                     <span>USD '.number_format($value['dt_withdrawal'],2,'.',',').'</span>

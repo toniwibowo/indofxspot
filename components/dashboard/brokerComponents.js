@@ -1,4 +1,7 @@
-const TableBroker = ({data}) => {
+const TableBroker = ({data, del}) => {
+    const delHandler = (id) => {
+        return del(id)
+    }
     return(
         <div className="col-md-8">
 
@@ -31,7 +34,7 @@ const TableBroker = ({data}) => {
                                                             <td>{item.dt_broker}</td>
                                                             <td>{item.name_account_type}</td>
                                                             <td>{item.dt_status}</td>
-                                                            <td><button className="btn btn-sm"><i className="fa fa-trash"></i></button></td>
+                                                            <td><button className="btn btn-sm" onClick={() => delHandler(item['broker_id'])}><i className="fa fa-trash"></i></button></td>
                                                         </tr>
                                                     )
                                                 })

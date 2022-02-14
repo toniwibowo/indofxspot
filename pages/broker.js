@@ -79,6 +79,51 @@ const App = () => {
         }
     }
 
+    const deleteBrokerHandler = (id) => {
+        console.log('just Chcek', id);
+        const deleteBorker = async () => {
+            const delBro = await fetch(`${app.baseUrl}api/broker/delAccBroker`, {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify({'broker_id' : id})
+            })
+
+            const response = await delBro.json()
+
+            if (delBro.status === 200) {
+                console.log('response', response);
+                if (response.status === 'Success') {
+                    Swal.fire('Success',response.message,'success')
+                    .then(btnYes => {
+                        if (btnYes.isConfirmed) {
+                            setReload(c => !c)
+                        }
+                    })
+                }else{
+                    Swal.fire('Failed', response.message, 'error')
+                }
+            }
+        }
+
+        Swal.fire({
+            'title':'Confirm',
+            'text':'Are you sure want to delete this item ?',
+            'icon':'question',
+            'confirmButtonText':'Yes',
+            'showCancelButton': true,
+            'cancelButtonText':'No',
+            'cancelButtonColor':'red',
+            'reverseButtons': true
+        })
+        .then(btnYes => {
+            if (btnYes.isConfirmed) {
+                deleteBorker()    
+            }
+        })
+    }
+
     useEffect(() => {
         console.log('DATA FIELDS', fieldsBroker);
     }, [fieldsBroker])
@@ -94,7 +139,7 @@ const App = () => {
 
                 <div className="page-cont-inner">
                     <div className="row">
-                        <TableBroker data={dataBroker} />
+                        <TableBroker data={dataBroker} del={(id) => deleteBrokerHandler(id)} />
                         <FormBroker accType={dataAccountType} change={inputHandler} submit={submitHandler} />
                     </div>
                 </div>

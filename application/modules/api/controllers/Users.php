@@ -337,6 +337,20 @@ class Users extends REST_Controller
             $this->response(['error' => 'Api could not be found'], 404);
         }
     }
+
+    public function testEmail_get()
+    {
+        $this->load->model('Users_model', 'user');
+
+        $email = $this->user->email($mailTo = 'toniewibowo@gmail.com', $subject='Test Email', $message = 'Test Email Isi', $mailFrom='indofxspot@lokalan.co.id', $mailName='No-reply');
+        
+        echo $email;
+        // if ($email) {
+        //     echo 'Terkirim';
+        // }else{
+        //     echo 'Tidak Terkirim';
+        // }
+    }
 }
 
 /* End of file Api.php */

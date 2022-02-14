@@ -15,7 +15,6 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 application/third_party/codeigniter-debugbar
-application/writeable
 
 public
 error_log
