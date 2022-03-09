@@ -1,5 +1,9 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 class Users_model extends CI_Model{
     public function __construct()
     {
@@ -8,26 +12,34 @@ class Users_model extends CI_Model{
 
     public function email($mailTo, $subject, $message, $mailFrom, $mailName)
     {
-        $this->load->library('email');
+        require APPPATH.'libraries/vendor/autoload.php';
+        require APPPATH.'libraries/PHPMailer-master/src/Exception.php';
+        require APPPATH.'libraries/PHPMailer-master/src/PHPMailer.php';
+        require APPPATH.'libraries/PHPMailer-master/src/SMTP.php';
 
-        $config['smtp_host'] = 'mail.lokalan.co.id';
-        $config['smtp_user'] = 'indofxspot@lokalan.co.id';
-        $config['smtp_pass'] = 'Admin1@#$';
-        $config['smtp_port'] = 587;
-        $config['mailtype']  = 'html';
+        $mail = new PHPMailer();
 
-        $this->email->initialize($config);
+        $mail->IsSMTP();
 
-        $this->email->from($mailFrom, $mailName);
-        $this->email->to($mailTo);
-        // $this->email->cc('another@another-example.com');
-        // $this->email->bcc('them@their-example.com');
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Host = 'mail.dripsweet.com';
+        $mail->Port = 465;
+        $mail->Username = 'admin@dripsweet.com';
+        $mail->Password = 'dripsweet1234';
 
-        $this->email->subject($subject);
-        $this->email->message($message);
+        $mail->AddAddress($mailTo);
+        $mail->SetFrom($mailFrom, $mailName);
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body = $message;
 
-        $this->email->send(FALSE);
+        if ($mail->Send()) {
+            return 'Terkirim';
+        }else{
+            return 'Tidak Terkirim';
+        }
 
-        return $this->email->print_debugger(array('headers'));
+        
     }
 }

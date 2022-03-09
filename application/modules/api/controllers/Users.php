@@ -342,7 +342,7 @@ class Users extends REST_Controller
     {
         $this->load->model('Users_model', 'user');
 
-        $email = $this->user->email($mailTo = 'toniewibowo@gmail.com', $subject='Test Email', $message = 'Test Email Isi', $mailFrom='indofxspot@lokalan.co.id', $mailName='No-reply');
+        $email = $this->user->email($mailTo = 'toniewibowo@gmail.com', $subject='Test Email', $message = 'Test Email Isi', $mailFrom='admin@dripsweet.com', $mailName='No-reply');
         
         echo $email;
         // if ($email) {
