@@ -12,17 +12,19 @@ class Users_model extends CI_Model{
 
     public function email($mailTo, $subject, $message, $mailFrom, $mailName)
     {
-        // require APPPATH.'libraries/vendor/autoload.php';
+        
         require APPPATH.'libraries/PHPMailer-master/src/Exception.php';
         require APPPATH.'libraries/PHPMailer-master/src/PHPMailer.php';
         require APPPATH.'libraries/PHPMailer-master/src/SMTP.php';
 
-        $mail = new PHPMailer();
+        //require APPPATH.'libraries/vendor/autoload.php';
+
+        $mail = new PHPMailer(true);
 
         $mail->IsSMTP();
 
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Host = 'mail.dripsweet.com';
         $mail->Port = 465;
         $mail->Username = 'admin@dripsweet.com';
@@ -39,7 +41,6 @@ class Users_model extends CI_Model{
         }else{
             return 'Tidak Terkirim';
         }
-
         
     }
 }
