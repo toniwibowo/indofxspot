@@ -12,7 +12,7 @@ class Users_model extends CI_Model{
 
     public function email($mailTo, $subject, $message, $mailFrom, $mailName)
     {
-        require APPPATH.'libraries/vendor/autoload.php';
+        // require APPPATH.'libraries/vendor/autoload.php';
         require APPPATH.'libraries/PHPMailer-master/src/Exception.php';
         require APPPATH.'libraries/PHPMailer-master/src/PHPMailer.php';
         require APPPATH.'libraries/PHPMailer-master/src/SMTP.php';
